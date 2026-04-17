@@ -1,6 +1,6 @@
 # XJTU-2023ELITE-LAB-AUTOMATION-and-AI-COURSES
 西安交通大学自动化专业资料
-# XJTU Automation Learning Materials
+Made By XJTU ELITE ，Bibi.C
 
 
 
