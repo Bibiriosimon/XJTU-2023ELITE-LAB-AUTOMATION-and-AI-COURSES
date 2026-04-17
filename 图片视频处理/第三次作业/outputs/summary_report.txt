@@ -1,0 +1,43 @@
+第三次作业结果摘要
+
+任务1：所有BMP图像直方图已输出到 outputs/task1_histograms
+任务2：所有BMP图像全局直方图均衡已输出到 outputs/task2_equalization
+任务3：编号图像按同名前缀匹配到原图，结果输出到 outputs/task3_hist_matching
+任务4：elain/lena 7x7局部直方图增强输出到 outputs/task4_local_7x7
+任务5：elain/woman 直方图分割输出到 outputs/task5_segmentation
+
+任务2（均衡）统计：
+- citywall.bmp: std 72.072 -> 73.920, entropy 7.371 -> 7.097
+- citywall1.bmp: std 79.508 -> 57.765, entropy 5.711 -> 5.535
+- citywall2.bmp: std 22.781 -> 88.083, entropy 4.743 -> 4.742
+- elain.bmp: std 46.050 -> 73.596, entropy 7.506 -> 7.383
+- elain1.bmp: std 103.353 -> 46.738, entropy 4.611 -> 4.556
+- elain2.bmp: std 39.993 -> 96.786, entropy 4.546 -> 4.503
+- elain3.bmp: std 5.292 -> 96.627, entropy 3.137 -> 3.137
+- lena.bmp: std 52.878 -> 73.548, entropy 7.594 -> 7.457
+- lena1.bmp: std 116.397 -> 45.686, entropy 1.217 -> 1.217
+- lena2.bmp: std 10.159 -> 73.235, entropy 5.218 -> 5.213
+- lena4.bmp: std 39.458 -> 54.085, entropy 5.389 -> 5.264
+- woman.BMP: std 63.368 -> 73.784, entropy 7.251 -> 6.992
+- woman1.bmp: std 75.404 -> 22.418, entropy 2.812 -> 2.684
+- woman2.bmp: std 38.388 -> 58.001, entropy 5.215 -> 5.097
+
+任务3（直方图匹配）统计：
+- citywall1.bmp -> citywall.bmp: mean 104.453 -> 114.917 (ref 108.416)
+- citywall2.bmp -> citywall.bmp: mean 95.147 -> 126.042 (ref 108.416)
+- elain1.bmp -> elain.bmp: mean 109.974 -> 150.818 (ref 135.378)
+- elain2.bmp -> elain.bmp: mean 124.397 -> 165.391 (ref 135.378)
+- elain3.bmp -> elain.bmp: mean 35.990 -> 169.112 (ref 135.378)
+- lena1.bmp -> lena.bmp: mean 94.374 -> 148.327 (ref 99.051)
+- lena2.bmp -> lena.bmp: mean 199.010 -> 101.173 (ref 99.051)
+- lena4.bmp -> lena.bmp: mean 35.026 -> 111.026 (ref 99.051)
+- woman1.bmp -> woman.BMP: mean 47.485 -> 163.161 (ref 122.217)
+- woman2.bmp -> woman.BMP: mean 41.168 -> 141.168 (ref 122.217)
+
+任务4（7x7局部增强）统计：
+- elain.bmp: std 46.050 -> 63.200, entropy 7.506 -> 5.671
+- lena.bmp: std 52.878 -> 63.084, entropy 7.594 -> 5.640
+
+任务5（分割）统计：
+- elain.bmp [Otsu(binary)]: T=137.000, foreground_ratio=0.4824
+- woman.BMP [Multi-Otsu(3 classes)]: T1=90.000, T2=172.000, high_class_ratio=0.1872

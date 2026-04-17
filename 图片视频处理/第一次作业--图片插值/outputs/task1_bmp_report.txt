@@ -1,0 +1,24 @@
+题1：BMP图像格式简介（以7.bmp为例）
+
+BMP文件通常由三部分组成：
+1) 文件头（14字节）：文件标识、文件大小、像素数据起始偏移。
+2) 信息头DIB（常见40字节）：宽高、位深、压缩方式、分辨率等。
+3) 颜色表与像素数据：
+   - 当位深 <= 8 时，通常有颜色表（调色板）；
+   - 像素数据按行存储，每行按4字节对齐。
+
+7.bmp解析结果：
+- 文件标识(signature): BM
+- 文件大小(file_size): 1134 bytes
+- 像素数据偏移(pixel_offset): 1078 bytes
+- DIB头大小(dib_size): 40 bytes
+- 宽度(width): 7
+- 高度(height): 7
+- 位平面(planes): 1
+- 位深(bits_per_pixel): 8
+- 压缩(compression): 0
+- 图像数据大小(image_size): 56 bytes
+- 水平分辨率(x_pixels_per_meter): 0
+- 垂直分辨率(y_pixels_per_meter): 0
+- 调色板颜色数(colors_used): 0
+- 重要颜色数(important_colors): 0

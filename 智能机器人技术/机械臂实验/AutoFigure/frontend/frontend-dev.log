@@ -1,0 +1,15 @@
+
+> autofigure-frontend@0.4.0 dev
+> next dev --webpack --port 6002 --hostname 127.0.0.1
+
+▲ Next.js 16.1.1 (webpack)
+- Local:         http://127.0.0.1:6002
+- Network:       http://127.0.0.1:6002
+- Experiments (use with caution):
+  · serverActions
+
+✓ Starting...
+✓ Ready in 4.2s
+○ Compiling / ...
+ GET / 307 in 48ms (compile: 6ms, render: 41ms)
+ GET /autofigure 200 in 1977ms (compile: 1486ms, render: 491ms)

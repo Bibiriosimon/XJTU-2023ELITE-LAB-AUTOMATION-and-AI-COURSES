@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}实验目的}{2}{section.1}%
+\contentsline {section}{\numberline {2}实验环境与数据}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}实验环境}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}实验数据}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}实验任务}{2}{section.3}%
+\contentsline {section}{\numberline {4}实验原理}{2}{section.4}%
+\contentsline {subsection}{\numberline {4.1}单应变换模型}{2}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}特征匹配与 RANSAC}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}结果评估}{3}{subsection.4.3}%
+\contentsline {section}{\numberline {5}关键代码}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}ORB 特征提取与匹配}{3}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}RANSAC 过滤误匹配}{3}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}随机 7 点估计单应矩阵}{4}{subsection.5.3}%
+\contentsline {section}{\numberline {6}实验流程}{4}{section.6}%
+\contentsline {section}{\numberline {7}实验结果与分析}{5}{section.7}%
+\contentsline {subsection}{\numberline {7.1}原始图像}{5}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}随机 7 对对应点}{5}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}估计得到的单应矩阵}{6}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}配准结果可视化}{6}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}量化指标}{7}{subsection.7.5}%
+\contentsline {section}{\numberline {8}结论}{7}{section.8}%

@@ -1,0 +1,7 @@
+﻿.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+智能机器人技术/机械臂实验/AutoFigure/.venv/

@@ -1,0 +1,9 @@
+当前目录是一个 Brave Search 的 Claude Code MCP 部署包。请按下面要求自动完成部署和验证：
+
+1. 运行 `powershell -ExecutionPolicy Bypass -File .\setup_brave_mcp.ps1`，创建本地 `.venv` 并安装依赖。
+2. 检查项目内 `.mcp.json` 是否存在，并确认 `brave-search` 使用的是 `tools\start_brave_mcp.cmd`。
+3. 运行 `claude mcp get brave-search`，确认状态是 Connected。
+4. 使用 `brave-search` 工具搜索 `PUMA560`，返回前 3 条结果的标题和链接，作为打通验证。
+5. 不要修改 `brave api.txt` 中的内容，也不要把 API key 输出到最终回答中。
+
+如果遇到错误，直接修复并继续，不要停在分析阶段。

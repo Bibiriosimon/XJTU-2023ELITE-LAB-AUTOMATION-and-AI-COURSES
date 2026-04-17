@@ -1,0 +1,3 @@
+﻿image,method,threshold_1,threshold_2,foreground_ratio
+elain.bmp,Otsu(binary),137.0,,0.4824180603027344
+woman.BMP,Multi-Otsu(3 classes),90.0,172.0,0.18723812103271484

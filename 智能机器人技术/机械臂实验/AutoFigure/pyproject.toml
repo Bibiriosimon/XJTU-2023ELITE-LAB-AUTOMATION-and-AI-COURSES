@@ -1,0 +1,154 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autofigure"
+version = "0.1.0"
+description = "AI-powered Scientific Figure Generation - Generate professional scientific figures from text descriptions or research papers"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AutoFigure Team"}
+]
+maintainers = [
+    {name = "AutoFigure Team"}
+]
+keywords = [
+    "autofigure",
+    "scientific",
+    "figure",
+    "diagram",
+    "generation",
+    "ai",
+    "llm",
+    "svg",
+    "mxgraph",
+    "draw.io",
+    "visualization",
+    "research",
+    "paper"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Multimedia :: Graphics",
+]
+requires-python = ">=3.8"
+
+dependencies = [
+    "openai>=1.0.0",
+    "Pillow>=10.0.0",
+    "requests>=2.31.0",
+    "cairosvg>=2.7.0",
+    "google-genai>=0.3.0",
+    "anthropic>=0.18.0",
+]
+
+[project.optional-dependencies]
+pdf = [
+    "pymupdf>=1.23.0",
+    "pdfplumber>=0.10.0",
+]
+web = [
+    "flask>=3.0.0",
+    "flask-cors>=4.0.0",
+    "playwright>=1.40.0",
+]
+enhancement = [
+    "easyocr>=1.7.0",
+]
+full = [
+    "pymupdf>=1.23.0",
+    "pdfplumber>=0.10.0",
+    "flask>=3.0.0",
+    "flask-cors>=4.0.0",
+    "playwright>=1.40.0",
+    "easyocr>=1.7.0",
+    "python-pptx>=0.6.21",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/ResearAI/AutoFigure"
+Documentation = "https://github.com/ResearAI/AutoFigure#readme"
+Repository = "https://github.com/ResearAI/AutoFigure"
+Issues = "https://github.com/ResearAI/AutoFigure/issues"
+Changelog = "https://github.com/ResearAI/AutoFigure/releases"
+
+[project.scripts]
+# Command-line interface (optional, for future use)
+# autofigure = "autofigure.cli:main"
+
+[tool.setuptools]
+packages = ["autofigure", "autofigure.utils"]
+
+[tool.setuptools.package-data]
+autofigure = [
+    "references/**/*.png",
+    "references/**/*.svg",
+    "references/**/*.jpg",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+exclude = '''
+/(
+    \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | __pycache__
+    | build
+    | dist
+    | \.eggs
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = ["E", "F", "W", "I", "N", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["tests", "build", "dist"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"

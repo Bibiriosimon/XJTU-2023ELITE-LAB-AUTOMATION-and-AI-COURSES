@@ -1,0 +1,6 @@
+﻿{
+    "backend_port":  8796,
+    "backend_pid":  7928,
+    "frontend_port":  6002,
+    "frontend_pid":  3280
+}

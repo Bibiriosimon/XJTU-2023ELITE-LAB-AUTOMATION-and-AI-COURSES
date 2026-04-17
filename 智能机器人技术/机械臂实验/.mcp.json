@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "tools\\start_brave_mcp.cmd"
+      ]
+    }
+  }
+}

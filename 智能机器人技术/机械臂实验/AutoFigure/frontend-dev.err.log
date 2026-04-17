@@ -1,0 +1,266 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Administrator\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\frontend\package-lock.json
+
+[Langfuse] Environment variables not configured - telemetry disabled
+
+thread 'tokio-runtime-worker' (27240) panicked at turbopack\crates\turbopack-core\src\ident.rs:352:34:
+byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\ADMINI~1\AppData\Local\Temp\next-panic-39ec373f12d96a4961274097a491ccda.log.
+
+To help make Turbopack better, report this error by clicking here: https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d1bd5b58%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ATurbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+
+thread 'tokio-runtime-worker' (28992) panicked at turbopack\crates\turbopack-core\src\ident.rs:352:34:
+byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+thread 'tokio-runtime-worker' (31272) panicked at turbopack\crates\turbopack-core\src\ident.rs:352:34:
+byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_011f821f`
+
+thread 'tokio-runtime-worker' (10324) panicked at turbopack\crates\turbopack-core\src\ident.rs:352:34:
+byte index 25 is not a char boundary; it is inside '三' (bytes 24..27) of `turbopack-Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_011f821f`
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write app endpoint /page
+
+Caused by:
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <AppEndpoint as Endpoint>::output failed
+- Failed to write app endpoint /page
+- Execution of all_server_paths failed
+- Execution of all_assets_from_entries failed
+- Execution of <ClientReferenceManifest as OutputAssetsReference>::references failed
+- Execution of build_manifest failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+    at <unknown> (TurbopackInternalError: Failed to write app endpoint /page) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\ADMINI~1\AppData\Local\Temp\next-panic-39ec373f12d96a4961274097a491ccda.log.
+
+To help make Turbopack better, report this error by clicking here: https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d1bd5b58%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ATurbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write app endpoint /page
+
+Caused by:
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <AppEndpoint as Endpoint>::output failed
+- Failed to write app endpoint /page
+- Execution of all_server_paths failed
+- Execution of all_assets_from_entries failed
+- Execution of <ClientReferenceManifest as OutputAssetsReference>::references failed
+- Execution of build_manifest failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+    at <unknown> (TurbopackInternalError: Failed to write app endpoint /page) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\ADMINI~1\AppData\Local\Temp\next-panic-39ec373f12d96a4961274097a491ccda.log.
+
+To help make Turbopack better, report this error by clicking here: https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage&body=Turbopack%20version%3A%20%60d1bd5b58%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ATurbopack%20Error%3A%20Failed%20to%20write%20app%20endpoint%20%2Fpage%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write app endpoint /page
+
+Caused by:
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <AppEndpoint as Endpoint>::output failed
+- Failed to write app endpoint /page
+- Execution of all_server_paths failed
+- Execution of all_assets_from_entries failed
+- Execution of <ClientReferenceManifest as OutputAssetsReference>::references failed
+- Execution of build_manifest failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 19 is not a char boundary; it is inside '智' (bytes 18..21) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_app_layout_tsx_b819e6fd`
+    at <unknown> (TurbopackInternalError: Failed to write app endpoint /page) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+⨯ Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+Error [TurbopackInternalError]: Failed to write page endpoint /_app
+
+Caused by:
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+
+Debug info:
+- Execution of get_written_endpoint_with_issues_operation failed
+- Execution of endpoint_write_to_disk failed
+- Execution of <PageEndpoint as Endpoint>::output failed
+- Failed to write page endpoint /_app
+- Execution of all_server_paths failed
+- Execution of server_path failed
+- Execution of <BrowserChunkingContext as ChunkingContext>::chunk_path failed
+- Execution of AssetIdent::output_name failed
+- byte index 15 is not a char boundary; it is inside '三' (bytes 14..17) of `Desktop_大二三_智能机器人技术_机械臂实验_AutoFigure_frontend_pages__app_2da965e7`
+    at <unknown> (TurbopackInternalError: Failed to write page endpoint /_app) {
+  location: 'turbopack\\crates\\turbopack-core\\src\\ident.rs:352:34'
+}
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`

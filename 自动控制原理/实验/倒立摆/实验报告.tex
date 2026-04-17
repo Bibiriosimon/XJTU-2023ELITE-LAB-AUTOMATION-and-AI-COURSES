@@ -1,0 +1,619 @@
+\documentclass[12pt, a4paper]{article}
+
+% ===== 中文支持 =====
+\usepackage[UTF8]{ctex}
+
+% ===== 页面设置 =====
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.8cm, right=2.8cm]{geometry}
+
+% ===== 常用宏包 =====
+\usepackage{amsmath, amssymb, amsfonts}   % 数学公式
+\usepackage{graphicx}                      % 图片插入
+\usepackage{booktabs}                      % 三线表
+\usepackage{array}                         % 表格增强
+\usepackage{xcolor}                        % 颜色
+\usepackage{listings}                      % 代码高亮
+\usepackage{hyperref}                      % 超链接
+\usepackage{enumitem}                      % 列表格式
+\usepackage{float}                         % 浮动体控制
+\usepackage{caption}                       % 图表标题
+\usepackage{subcaption}                    % 子图
+\usepackage{bm}                            % 粗体数学符号
+\usepackage{mathtools}                     % 数学工具
+\usepackage{tikz}                          % 绘图
+\usepackage{pgfplots}                      % 函数图像
+\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}                     % 彩色盒子
+\tcbuselibrary{skins, breakable, listings}
+\usepackage{fancyhdr}                      % 页眉页脚
+\usepackage{titlesec}                      % 标题格式
+\usepackage{setspace}                      % 行距
+
+% ===== 超链接设置 =====
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = blue!70!black,
+    citecolor  = green!50!black,
+    urlcolor   = cyan!70!black
+}
+
+% ===== 代码样式 =====
+\lstdefinestyle{matlab}{
+    language        = Matlab,
+    basicstyle      = \ttfamily\small,
+    keywordstyle    = \color{blue}\bfseries,
+    commentstyle    = \color{green!60!black}\itshape,
+    stringstyle     = \color{orange},
+    numberstyle     = \tiny\color{gray},
+    numbers         = left,
+    numbersep       = 6pt,
+    breaklines      = true,
+    frame           = single,
+    framerule       = 0.5pt,
+    rulecolor       = \color{gray!50},
+    backgroundcolor = \color{gray!5},
+    tabsize         = 4,
+    showstringspaces= false,
+    xleftmargin     = 1.5em,
+}
+
+% ===== 彩色提示框 =====
+\newtcolorbox{notebox}[1][]{
+    colback  = blue!5,
+    colframe = blue!60!black,
+    fonttitle= \bfseries,
+    title    = {注意},
+    #1
+}
+\newtcolorbox{stepbox}[2][]{
+    colback  = green!5,
+    colframe = green!60!black,
+    fonttitle= \bfseries,
+    title    = {#2},
+    #1
+}
+\newtcolorbox{formulabox}[1][]{
+    colback  = yellow!8,
+    colframe = orange!80!black,
+    #1
+}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small 实验二\quad 旋转倒立摆控制实验}
+\fancyhead[R]{\small \leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ===== 行距 =====
+\setstretch{1.35}
+
+% ===== 标题信息 =====
+\title{
+    \vspace{-1cm}
+    {\Large \textbf{实验二\quad 旋转倒立摆控制实验}} \\[0.5em]
+    {\large 实验报告}
+}
+\author{姓名：\underline{\quad\quad\quad\quad\quad\quad} \qquad
+        学号：\underline{\quad\quad\quad\quad\quad\quad} \qquad
+        班级：\underline{\quad\quad\quad\quad\quad\quad}}
+\date{2026年4月}
+
+% ================================================================
+\begin{document}
+% ================================================================
+
+\maketitle
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+% ================================================================
+\section{实验目的}
+% ================================================================
+
+\begin{enumerate}[leftmargin=2em]
+    \item 熟悉 Quanser QUBE-Servo 旋转倒立摆的状态空间模型；
+    \item 掌握基于能量的起摆控制（Swing-up Control）原理；
+    \item 掌握状态空间极点配置控制系统设计方法；
+    \item 了解线性二次型最优调节器（LQR）的设计方法，并与极点配置进行比较。
+\end{enumerate}
+
+% ================================================================
+\section{实验设备与文件}
+% ================================================================
+
+\begin{table}[H]
+\centering
+\caption{实验文件列表}
+\begin{tabular}{lll}
+\toprule
+文件名 & 类型 & 说明 \\
+\midrule
+\texttt{qube3\_rotpen\_param.m}    & MATLAB脚本 & 系统物理参数定义 \\
+\texttt{setup\_swingup.m}          & MATLAB脚本 & 起摆控制参数初始化 \\
+\texttt{q\_qube3\_swingup.slx}     & Simulink模型 & 倒立摆完整控制模型 \\
+\texttt{balance\_pole\_placement.m}& MATLAB脚本 & 极点配置设计（任务4）\\
+\texttt{balance\_lqr.m}            & MATLAB脚本 & LQR最优控制设计（任务5）\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ================================================================
+\section{系统建模}
+% ================================================================
+
+\subsection{系统结构}
+
+Quanser QUBE-Servo 旋转倒立摆由两部分组成：
+\begin{itemize}
+    \item \textbf{旋转臂}：由电机驱动，绕竖直轴旋转，转角记为 $\theta$；
+    \item \textbf{摆杆}：铰接于转臂末端，在竖直平面内自由摆动，转角记为 $\alpha$（竖直向上为 $\alpha = 0$）。
+\end{itemize}
+
+系统状态向量定义为：
+\begin{equation}
+    \bm{x} = \begin{bmatrix} \theta & \alpha & \dot{\theta} & \dot{\alpha} \end{bmatrix}^\top
+\end{equation}
+
+\subsection{物理参数}
+
+\begin{table}[H]
+\centering
+\caption{系统物理参数}
+\begin{tabular}{clll}
+\toprule
+符号 & 含义 & 数值 & 单位 \\
+\midrule
+$R_m$  & 电机电阻        & 7.5    & $\Omega$ \\
+$k_t$  & 力矩常数        & 0.0422 & N$\cdot$m/A \\
+$k_m$  & 反电动势常数    & 0.0422 & V$\cdot$s/rad \\
+$m_r$  & 转臂质量        & 0.095  & kg \\
+$r$    & 转臂长度        & 0.085  & m \\
+$J_r$  & 转臂转动惯量    & $m_r r^2/3$ & kg$\cdot$m$^2$ \\
+$m_p$  & 摆杆质量        & 0.024  & kg \\
+$L_p$  & 摆杆长度        & 0.129  & m \\
+$l$    & 摆杆质心距枢轴  & $L_p/2$     & m \\
+$J_p$  & 摆杆转动惯量    & $m_p L_p^2/3$ & kg$\cdot$m$^2$ \\
+$g$    & 重力加速度      & 9.81   & m/s$^2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{线性化状态空间模型}
+
+在摆杆竖直向上平衡点（$\alpha = 0$）附近线性化，得到状态空间方程：
+
+\begin{equation}
+    \dot{\bm{x}} = A\bm{x} + Bu, \quad \bm{y} = C\bm{x}
+\end{equation}
+
+\begin{formulabox}
+\begin{equation}
+A = \begin{pmatrix}
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 149.2751 & -0.0104 & 0 \\
+0 & -261.6091 & -0.0103 & 0
+\end{pmatrix}, \quad
+B = \begin{pmatrix} 0 \\ 0 \\ 49.7275 \\ 49.1493 \end{pmatrix}
+\end{equation}
+\begin{equation}
+C = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}, \quad
+D = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\end{equation}
+\end{formulabox}
+
+其中输入 $u$ 为电机电压（单位：V），输出 $\bm{y} = [\theta,\, \alpha]^\top$。
+
+% ================================================================
+\section{起摆控制原理}
+% ================================================================
+
+\subsection{能量分析}
+
+起摆控制的目标是：从自然下垂位置（$\alpha = \pm\pi$）将摆杆摆起至竖直位置（$\alpha = 0$）。
+
+摆杆总能量（动能 + 势能）为：
+\begin{equation}
+    E = \frac{1}{2}J_p\dot{\alpha}^2 + m_p g l (1 - \cos\alpha)
+\end{equation}
+
+当摆处于竖直位置时，参考能量为：
+\begin{equation}
+    E_r = 2 m_p g l
+\end{equation}
+
+对能量方程求导，结合运动方程，得能量变化率：
+\begin{equation}
+    \dot{E} = m_p l \dot{\alpha} \ddot{a} \cos\alpha
+\end{equation}
+
+其中 $\ddot{a}$ 为转臂枢轴的线加速度。
+
+\subsection{能量控制律}
+
+控制律利用转臂枢轴加速度来注入/耗散能量：
+\begin{equation}
+    u = (E_r - E)\,\text{sign}(\dot{\alpha}\cos\alpha)
+    \label{eq:swingup_basic}
+\end{equation}
+
+加入增益 $\mu$ 和幅值限制，最终的起摆控制律为：
+\begin{equation}
+    \boxed{u = \text{sat}_{u_\text{max}}\!\left[\mu(E_r - E)\,\text{sign}(\dot{\alpha}\cos\alpha)\right]}
+    \label{eq:swingup}
+\end{equation}
+
+式中：
+\begin{itemize}
+    \item $\mu$（即 $K_e$）：可调增益，影响能量注入速率；
+    \item $E_r$：参考能量，与起摆的目标位置相关；
+    \item $u_\text{max}$：转子最大加速度对应的控制幅值。
+\end{itemize}
+
+\subsection{混合切换控制}
+
+当摆角接近竖直位置时切换至稳摆控制器：
+\begin{equation}
+    u = \begin{cases}
+        u_\text{bal}, & |\alpha| - \pi \leq 20^\circ \\
+        u_\text{swing}, & \text{其他}
+    \end{cases}
+\end{equation}
+
+% ================================================================
+\section{稳摆控制：极点配置}
+% ================================================================
+
+\subsection{可控性检验}
+
+状态反馈的前提是系统完全可控，可控性矩阵为：
+\begin{equation}
+    Q_c = \begin{bmatrix} B & AB & A^2B & A^3B \end{bmatrix}
+\end{equation}
+
+当 $\text{rank}(Q_c) = n = 4$ 时，系统完全可控，可通过状态反馈任意配置极点。
+
+\subsection{状态反馈控制律}
+
+引入全状态反馈：
+\begin{equation}
+    u = -K\bm{x} = -\begin{bmatrix} k_1 & k_2 & k_3 & k_4 \end{bmatrix}
+    \begin{bmatrix} \theta \\ \alpha \\ \dot{\theta} \\ \dot{\alpha} \end{bmatrix}
+\end{equation}
+
+闭环系统矩阵变为 $A - BK$，闭环特征值（极点）由 $K$ 决定。
+
+\subsection{性能指标与期望极点计算}
+
+给定性能指标：
+\begin{itemize}
+    \item 超调量 $M_p < 5\%$
+    \item 调节时间 $t_s < 1\,\text{s}$（5\%准则）
+\end{itemize}
+
+由超调量公式 $M_p = e^{-\pi\zeta/\sqrt{1-\zeta^2}}$ 求阻尼比下限：
+\begin{equation}
+    M_p < 5\% \implies \zeta \geq 0.69
+\end{equation}
+
+由调节时间公式 $t_s = 3/(\zeta\omega_n)$ 求自然频率下限：
+\begin{equation}
+    t_s < 1\,\text{s} \implies \zeta\omega_n > 3
+\end{equation}
+
+\textbf{本实验取} $\zeta = 0.8$，$\omega_n = 5\,\text{rad/s}$，验算：
+\begin{align}
+    M_p &= e^{-\pi \times 0.8/0.6} \times 100\% \approx 1.5\% < 5\% \quad\checkmark \\
+    t_s &= 3/(0.8 \times 5) = 0.75\,\text{s} < 1\,\text{s} \quad\checkmark
+\end{align}
+
+\textbf{期望极点}：
+\begin{align}
+    p_{1,2} &= -\zeta\omega_n \pm j\omega_n\sqrt{1-\zeta^2} = -4 \pm 3j \quad \text{（主导极点）}\\
+    p_{3,4} &= -20,\quad -25 \quad \text{（非主导极点，远离虚轴）}
+\end{align}
+
+\subsection{Ackermann 公式求 K}
+
+利用 MATLAB 的 \texttt{acker()} 函数（Ackermann 公式）计算状态增益矩阵：
+
+\begin{lstlisting}[style=matlab, caption={极点配置核心代码}]
+desired_poles = [-4+3j, -4-3j, -20, -25];
+K = acker(A, B, desired_poles);
+\end{lstlisting}
+
+% ================================================================
+\section{稳摆控制：LQR 最优控制}
+% ================================================================
+
+\subsection{LQR 问题描述}
+
+线性二次型调节器（LQR）寻求使如下性能指标最小的控制律 $u = -K\bm{x}$：
+
+\begin{equation}
+    J = \int_0^\infty \left( \bm{x}^\top Q\,\bm{x} + u^\top R\,u \right) dt
+    \label{eq:lqr_cost}
+\end{equation}
+
+其中：
+\begin{itemize}
+    \item $Q \succeq 0$：状态权重矩阵（半正定），$Q$ 越大对状态误差惩罚越强；
+    \item $R > 0$：控制权重矩阵（正定），$R$ 越大控制量越保守。
+\end{itemize}
+
+\subsection{最优解}
+
+通过求解代数 Riccati 方程：
+\begin{equation}
+    A^\top P + PA - PBR^{-1}B^\top P + Q = 0
+\end{equation}
+
+得到最优反馈增益：
+\begin{equation}
+    \boxed{K = R^{-1}B^\top P}
+\end{equation}
+
+\subsection{本实验参数}
+
+本实验取：
+\begin{equation}
+    Q = \text{diag}(1,\,1,\,1,\,1), \quad R = 1
+\end{equation}
+
+MATLAB 实现：
+\begin{lstlisting}[style=matlab, caption={LQR设计核心代码}]
+Q = diag([1, 1, 1, 1]);
+R = 1;
+K = lqr(A, B, Q, R);
+\end{lstlisting}
+
+\subsection{极点配置与 LQR 的比较}
+
+\begin{table}[H]
+\centering
+\caption{极点配置 vs LQR 特点对比}
+\begin{tabular}{lll}
+\toprule
+比较维度 & 极点配置 & LQR 最优控制 \\
+\midrule
+设计出发点  & 指定闭环极点位置 & 最小化性能指标 $J$ \\
+参数选择    & 期望极点（直观）  & 权重矩阵 $Q$、$R$（需调节） \\
+鲁棒性      & 依赖极点选择      & 对称保证一定增益/相位裕度 \\
+适用系统    & SISO 为主         & MIMO 天然适用 \\
+最优性      & 无最优性保证      & 在 $J$ 意义下最优 \\
+控制量      & 不直接约束        & 通过 $R$ 隐式约束 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ================================================================
+\section{实验步骤：代码运行指南}
+% ================================================================
+
+\begin{notebox}
+运行前请确认：MATLAB 当前目录已切换至实验文件夹\\
+\texttt{.../倒立摆/daolibai/daolibai/}，否则会提示文件找不到。
+\end{notebox}
+
+\subsection{第一步：加载系统参数（每次打开 MATLAB 必做）}
+
+\begin{stepbox}{操作：在 MATLAB 命令窗口输入}
+\begin{lstlisting}[style=matlab]
+>> setup_swingup
+\end{lstlisting}
+\end{stepbox}
+
+\textbf{该脚本完成的工作：}
+\begin{itemize}
+    \item 调用 \texttt{qube3\_rotpen\_param.m}，将所有物理参数（$m_p$、$L_p$、$k_t$ 等）加载到工作区；
+    \item 计算参考能量 $E_r = 2m_p g l$；
+    \item 计算最大加速度 $a_\text{max}$；
+    \item 设置默认稳摆增益 \texttt{K = [1.000, 26.72, 0.8269, 2.214]}。
+\end{itemize}
+
+运行成功后工作区中会出现 \texttt{Rm}、\texttt{kt}、\texttt{K}、\texttt{Er} 等变量。
+
+\subsection{第二步：打开 Simulink 控制模型}
+
+\begin{stepbox}{操作：在 MATLAB 命令窗口输入}
+\begin{lstlisting}[style=matlab]
+>> open('q_qube3_swingup.slx')
+\end{lstlisting}
+\end{stepbox}
+
+或在文件夹中双击 \texttt{q\_qube3\_swingup.slx}。
+
+Simulink 模型包含三个核心模块：
+\begin{itemize}
+    \item \textbf{Swing-Up Control}：能量起摆控制块，读取 \texttt{Ke}、\texttt{Er}、\texttt{u\_max}；
+    \item \textbf{Balance Control}：状态反馈稳摆块，读取工作区的 \texttt{K}；
+    \item \textbf{Rotary Pendulum Interface}：硬件接口，连接实体 QUBE-Servo 设备。
+\end{itemize}
+
+\subsection{第三步（任务2）：调参观察起摆}
+
+在 Simulink 模型中，双击参数设置模块，分别修改：
+\begin{itemize}
+    \item $K_e$（\texttt{Ke}）：控制增益，取值 $< 60$；
+    \item $E_r$（\texttt{Er}）：参考能量，取值 $< 40\,\text{mJ}$；
+    \item $u_\text{max}$（\texttt{u\_max}）：最大加速度，取值 $< 8\,\text{m/s}^2$。
+\end{itemize}
+
+\textbf{连接硬件后}点击 Simulink 运行按钮，观察示波器中摆角 $\alpha$、能量 $E$、电机电压 $V_m$ 的波形。
+
+\begin{notebox}
+记录不同 $K_e$、$E_r$、$u_\text{max}$ 下的波形差异，总结各参数的物理作用。
+\end{notebox}
+
+\subsection{第四步（任务3）：手动稳摆观察}
+
+\begin{stepbox}{操作步骤}
+\begin{enumerate}
+    \item 在 Simulink 中将 $K_e$ 设为 \texttt{0}（禁用起摆控制）；
+    \item 点击运行；
+    \item 用手将摆杆缓慢推至竖直位置（$\alpha \approx 0$）；
+    \item 松手，观察 Balance Control 自动维持平衡。
+\end{enumerate}
+\end{stepbox}
+
+\subsection{第五步（任务4）：极点配置稳摆控制}
+
+\begin{stepbox}{操作：在 MATLAB 命令窗口输入}
+\begin{lstlisting}[style=matlab]
+>> balance_pole_placement
+\end{lstlisting}
+\end{stepbox}
+
+脚本运行后命令窗口将输出：
+\begin{lstlisting}[style=matlab, numbers=none]
+可控性检验：系统完全可控
+预期性能: 超调量 = 1.5%, 调节时间 = 0.75 s
+期望极点: -4.0+3.0j,  -4.0-3.0j,  -20.0,  -25.0
+K = [xxx, xxx, xxx, xxx]
+闭环极点验证: ...
+K 已写入工作区，可直接运行 q_qube3_swingup.slx。
+\end{lstlisting}
+
+同时自动弹出\textbf{极点配置前后响应对比图}（摆角 $\alpha$ 和转臂角 $\theta$ 各一张），截图保存用于报告。
+
+之后\textbf{无需修改 Simulink}，直接在 Simulink 中点击运行即可——Balance Control 模块自动读取工作区更新后的 \texttt{K}。
+
+\subsection{第六步（任务5）：LQR 最优控制}
+
+\begin{stepbox}{操作：在 MATLAB 命令窗口输入}
+\begin{lstlisting}[style=matlab]
+>> balance_lqr
+\end{lstlisting}
+\end{stepbox}
+
+脚本运行后命令窗口输出 LQR 增益 \texttt{K} 及闭环极点，同时弹出响应对比图。
+
+同样无需修改 Simulink，直接运行即可观察 LQR 控制效果。
+
+\begin{notebox}
+\textbf{切换控制方式的方法：}\\
+每次只需在 MATLAB 命令窗口运行对应脚本，工作区中的 \texttt{K} 即自动更新，Simulink 重新运行时即使用新的 \texttt{K}。无需打开 \texttt{.slx} 文件内部进行任何修改。
+\end{notebox}
+
+\subsection{完整运行顺序总结}
+
+\begin{table}[H]
+\centering
+\caption{实验室操作流程}
+\begin{tabular}{clll}
+\toprule
+顺序 & 命令/操作 & 对应任务 & 需要硬件 \\
+\midrule
+1 & \texttt{>> setup\_swingup}            & 初始化参数   & 否 \\
+2 & 打开 \texttt{q\_qube3\_swingup.slx}  & 任务1        & 否 \\
+3 & 调节 Ke、Er、u\_max 后运行 Simulink  & 任务2        & \textbf{是} \\
+4 & Ke=0，运行，手动竖起摆杆             & 任务3        & \textbf{是} \\
+5 & \texttt{>> balance\_pole\_placement}  & 任务4（仿真）& 否 \\
+  & 将新 K 接入 Simulink 运行             & 任务4（硬件）& \textbf{是} \\
+6 & \texttt{>> balance\_lqr}              & 任务5（仿真）& 否 \\
+  & 将新 K 接入 Simulink 运行             & 任务5（硬件）& \textbf{是} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ================================================================
+\section{思考题}
+% ================================================================
+
+\subsection{思考题1：起摆与稳摆控制的区别；虚拟仿真中的算法}
+
+\textbf{区别：}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+& 起摆控制 & 稳摆控制 \\
+\midrule
+目标 & 从下垂摆至竖直 & 维持竖直平衡 \\
+系统特性 & 高度非线性，大角度 & 线性化模型，小偏差 \\
+控制方法 & 能量注入（非线性） & 状态反馈（线性） \\
+适用范围 & $\alpha \in [-\pi, \pi]$ & $|\alpha| < 20^\circ$ 附近 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{虚拟仿真起摆算法：}
+
+虚拟仿真中采用\textbf{能量成型控制（Energy Shaping）}实现起摆，具体为式~\eqref{eq:swingup} 所示的能量控制律。算法核心思想是：
+\begin{itemize}
+    \item 计算摆杆当前总能量 $E = \frac{1}{2}J_p\dot{\alpha}^2 + m_p g l(1 - \cos\alpha)$；
+    \item 与参考能量 $E_r = 2m_p g l$ 比较，得到能量误差 $(E_r - E)$；
+    \item 根据 $\dot{\alpha}\cos\alpha$ 的符号决定加速/减速方向，持续向摆中注入能量；
+    \item 当摆能量接近 $E_r$（即接近竖直位置）时，切换至线性稳摆控制器。
+\end{itemize}
+
+\subsection{思考题2：最优控制与极点配置的特点比较}
+
+\textbf{极点配置的特点：}
+\begin{itemize}
+    \item 设计直观，通过指定期望闭环极点位置来满足时域性能指标；
+    \item 对 SISO 系统操作简便（\texttt{acker}），但多输入时极点选择困难；
+    \item 无最优性保证，极点选取依赖工程经验；
+    \item 对参数摄动的鲁棒性不明确。
+\end{itemize}
+
+\textbf{LQR 最优控制的特点：}
+\begin{itemize}
+    \item 以最小化二次型性能指标 $J$（式~\eqref{eq:lqr_cost}）为目标，具有明确最优性；
+    \item 权重矩阵 $Q$、$R$ 物理意义清晰：$Q$ 大则收敛快但控制量大，$R$ 大则节能但响应慢；
+    \item 可证明对增益裕度 $(\frac{1}{2}, +\infty)$、相位裕度 $\pm 60^\circ$ 的鲁棒性；
+    \item 天然支持 MIMO 系统，参数调节相对系统化；
+    \item 极点位置由 $Q$、$R$ 隐式决定，不如极点配置直观。
+\end{itemize}
+
+% ================================================================
+\section{实验结果记录}
+% ================================================================
+
+（以下留白，实验后填写）
+
+\subsection{任务2：起摆参数调节记录}
+
+\begin{table}[H]
+\centering
+\caption{不同参数下的起摆观察}
+\begin{tabular}{cccp{6cm}}
+\toprule
+$K_e$ & $E_r$ (mJ) & $u_\text{max}$ (m/s$^2$) & 观察现象 \\
+\midrule
+  &   &   & \\[1em]
+  &   &   & \\[1em]
+  &   &   & \\[1em]
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{任务4：极点配置结果}
+
+求得状态增益矩阵：
+\[
+K_\text{pp} = \begin{bmatrix} \quad & \quad & \quad & \quad \end{bmatrix}
+\]
+
+闭环极点：\underline{\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad}
+
+（在此插入响应对比图）
+
+\subsection{任务5：LQR 控制结果}
+
+求得 LQR 增益矩阵：
+\[
+K_\text{LQR} = \begin{bmatrix} \quad & \quad & \quad & \quad \end{bmatrix}
+\]
+
+闭环极点：\underline{\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad}
+
+（在此插入响应对比图）
+
+% ================================================================
+\end{document}
+% ================================================================

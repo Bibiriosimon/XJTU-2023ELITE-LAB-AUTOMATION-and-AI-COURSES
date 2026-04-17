@@ -1,0 +1,8 @@
+Homography H (mapping moving Image B -> fixed Image A):
+[[ 9.6725598367e-01  2.5684774372e-01 -1.3077366273e+00]
+ [-2.5628367296e-01  9.6679783806e-01  7.1632915441e+02]
+ [ 2.3859967617e-07  5.1762999823e-07  1.0000000000e+00]]
+
+Inlier RMSE (evaluated on all RANSAC inliers): 1.356802 pixels
+RANSAC inliers: 1330
+Raw matched pairs: 1483

@@ -1,0 +1,8 @@
+[AutoFigure] Routes registered, module available: True
+[AutoFigure] Routes registered successfully
+[AutoFigure] Starting backend server on http://127.0.0.1:8796
+[AutoFigure] LOCAL ACCESS ONLY - Public network access is disabled
+[AutoFigure] Backend path: C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\backend
+[AutoFigure] AutoFigure path: C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\autofigure
+ * Serving Flask app 'app'
+ * Debug mode: on

@@ -1,0 +1,10 @@
+⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use 127.0.0.1:6002
+    at <unknown> (Error: listen EADDRINUSE: address already in use 127.0.0.1:6002) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '127.0.0.1',
+  port: 6002
+}
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`

@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\backend\app.py", line 45, in <module>
+    from autofigure_routes import register_autofigure_routes
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\backend\autofigure_routes.py", line 27, in <module>
+    from autofigure.generator import (
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\autofigure\__init__.py", line 45, in <module>
+    from .agent import AutoFigureAgent, GenerationResult
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\autofigure\agent.py", line 14, in <module>
+    from .generator import figure_generator_pipeline, update_config_from_sdk
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\autofigure\generator.py", line 9, in <module>
+    import cairosvg
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\.venv\Lib\site-packages\cairosvg\__init__.py", line 25, in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\.venv\Lib\site-packages\cairosvg\surface.py", line 9, in <module>
+    import cairocffi as cairo
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\.venv\Lib\site-packages\cairocffi\__init__.py", line 60, in <module>
+    cairo = dlopen(
+            ^^^^^^^
+  File "C:\Users\Administrator\Desktop\大二三\智能机器人技术\机械臂实验\AutoFigure\.venv\Lib\site-packages\cairocffi\__init__.py", line 57, in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: no library called "cairo-2" was found
+no library called "cairo" was found
+no library called "libcairo-2" was found
+cannot load library 'libcairo.so.2': error 0x7e.  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+cannot load library 'libcairo.2.dylib': error 0x7e.  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+cannot load library 'libcairo-2.dll': error 0x7e.  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
