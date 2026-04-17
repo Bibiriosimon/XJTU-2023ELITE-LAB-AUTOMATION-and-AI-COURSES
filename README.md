@@ -2,9 +2,7 @@
 西安交通大学自动化专业资料
 # XJTU Automation Learning Materials
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&center=true&vCenter=true&width=700&lines=XJTU+Automation+Learning+Materials;实验资料+%7C+课程讲义+%7C+AI+拓展资料;For+Automation+and+AI+Learners" alt="Typing SVG" />
-</p>
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/XJTU-Automation-blue?style=for-the-badge" />
